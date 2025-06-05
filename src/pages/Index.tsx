@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,18 +11,18 @@ const Index = () => {
   const services = [
     {
       title: "Sunday Worship",
-      time: "9:00 AM & 11:00 AM",
+      time: "8:30 AM & 11:00 AM",
       description: "Join us for inspiring worship and fellowship"
     },
     {
-      title: "Bible Study",
-      time: "Wednesday 7:00 PM",
-      description: "Deepen your understanding of God's word"
+      title: "Youth Fellowship",
+      time: "Wednesday 5:00 PM",
+      description: "Building the next generation of faith leaders"
     },
     {
-      title: "Youth Fellowship",
-      time: "Friday 6:00 PM",
-      description: "Building the next generation of faith leaders"
+      title: "Intercessory Prayers",
+      time: "Thursday 5:00-7:00 PM",
+      description: "Come together in prayer and intercession"
     }
   ];
 
@@ -57,7 +56,7 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>info@faithconnect.org</span>
+              <span>info@pceanyari.org</span>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4">
@@ -74,7 +73,7 @@ const Index = () => {
             <div className="flex items-center gap-3">
               <Church className="h-10 w-10 text-blue-900" />
               <div>
-                <h1 className="text-2xl font-bold text-blue-900">FaithConnect</h1>
+                <h1 className="text-2xl font-bold text-blue-900">PCEA NYARI CHURCH</h1>
                 <p className="text-sm text-gray-600">Connecting Hearts, Building Faith</p>
               </div>
             </div>
@@ -132,7 +131,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl text-white">
             <h2 className="text-5xl font-bold mb-6">
-              Welcome to FaithConnect
+              Welcome to PCEA NYARI CHURCH
             </h2>
             <p className="text-xl mb-8 leading-relaxed">
               A place where faith grows, community thrives, and hearts are transformed. 
@@ -226,7 +225,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5" />
-                  <span>info@faithconnect.org</span>
+                  <span>info@pceanyari.org</span>
                 </div>
               </div>
             </div>
@@ -246,7 +245,7 @@ const Index = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Church className="h-6 w-6" />
-                <span className="text-xl font-bold">FaithConnect</span>
+                <span className="text-xl font-bold">PCEA NYARI CHURCH</span>
               </div>
               <p className="text-gray-400 mb-4">
                 Building stronger church communities through faith, fellowship, and love.
@@ -280,7 +279,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 FaithConnect. All rights reserved. | Built with faith and love.</p>
+            <p>&copy; 2024 PCEA NYARI CHURCH. All rights reserved. | Built with faith and love.</p>
           </div>
         </div>
       </footer>
