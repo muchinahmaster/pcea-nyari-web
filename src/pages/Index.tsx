@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -71,7 +72,11 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <Church className="h-10 w-10 text-blue-900" />
+              <img 
+                src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
+                alt="PCEA Nyari Parish Logo" 
+                className="h-12 w-12 object-contain"
+              />
               <div>
                 <h1 className="text-2xl font-bold text-blue-900">PCEA NYARI CHURCH</h1>
                 <p className="text-sm text-gray-600">Connecting Hearts, Building Faith</p>
@@ -124,7 +129,7 @@ const Index = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1473177104440-ffee2f376098?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+            backgroundImage: "url('/lovable-uploads/c8b8453f-eeef-4726-ab8c-963f697161da.png')",
           }}
         />
         <div className="absolute inset-0 bg-blue-900/70" />
@@ -194,8 +199,8 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">{announcement.description}</p>
-                  <Button variant="link" className="p-0 mt-3 text-blue-900">
-                    Read More →
+                  <Button variant="link" className="p-0 mt-3 text-blue-900" asChild>
+                    <Link to="/events">Read More →</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -248,7 +253,11 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Church className="h-6 w-6" />
+                <img 
+                  src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
+                  alt="PCEA Nyari Parish Logo" 
+                  className="h-6 w-6 object-contain"
+                />
                 <span className="text-xl font-bold">PCEA NYARI CHURCH</span>
               </div>
               <p className="text-gray-400 mb-4">
@@ -283,7 +292,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 PCEA NYARI CHURCH. All rights reserved. | Built with faith and love.</p>
+            <p>&copy; 2025 PCEA NYARI CHURCH. All rights reserved. | Built with faith and love.</p>
           </div>
         </div>
       </footer>
