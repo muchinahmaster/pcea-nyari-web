@@ -52,11 +52,11 @@ const Index = () => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
-              <span>+254 700 000 000</span>
+              <span>+254 793 060491</span>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4" />
-              <span>info@pceanyari.org</span>
+              <span>pceanyariparish@gmail.com</span>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4">
@@ -217,15 +217,19 @@ const Index = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5" />
-                  <span>123 Faith Street, Nairobi, Kenya</span>
+                  <span>REDHILL RD, Nairobi Kenya</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5" />
+                  <span>PO BOX 1202-00621 Village Market, Kenya</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5" />
-                  <span>+254 700 000 000</span>
+                  <span>+254 793 060491</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5" />
-                  <span>info@pceanyari.org</span>
+                  <span>pceanyariparish@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -248,7 +252,7 @@ const Index = () => {
                 <span className="text-xl font-bold">PCEA NYARI CHURCH</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Building stronger church communities through faith, fellowship, and love.
+                PCEA Nyari Parish is a Church where you are Welcomed, Accepted, Loved and Shepherded.
               </p>
             </div>
             <div>
