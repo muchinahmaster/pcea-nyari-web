@@ -42,7 +42,7 @@ const CreatePostModal = ({ isOpen, onClose, onSubmit }: CreatePostModalProps) =>
     
     toast({
       title: "Post Created",
-      description: "Your post has been shared with the community!",
+      description: "Your post has been shared with the church!",
     });
     
     onClose();

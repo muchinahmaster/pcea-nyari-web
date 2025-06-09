@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -175,7 +176,7 @@ const Dashboard = () => {
             <div className="flex items-center gap-4">
               <Church className="h-8 w-8 text-blue-600" />
               <div>
-                <h1 className="text-2xl font-bold">Grace Community Church</h1>
+                <h1 className="text-2xl font-bold">PCEA Nyari Church</h1>
                 <p className="text-gray-600">Welcome back, John!</p>
               </div>
             </div>
@@ -224,7 +225,7 @@ const Dashboard = () => {
                   onClick={() => navigate('/ministries')}
                 >
                   <Users className="h-4 w-4 mr-2" />
-                  Browse Groups
+                  Browse Ministries
                 </Button>
                 <Button 
                   className="w-full justify-start" 
@@ -258,9 +259,9 @@ const Dashboard = () => {
           <div className="lg:col-span-3">
             <Tabs defaultValue="feed" className="space-y-6">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="feed">Community Feed</TabsTrigger>
+                <TabsTrigger value="feed">Church Feed</TabsTrigger>
                 <TabsTrigger value="prayer">Prayer Wall</TabsTrigger>
-                <TabsTrigger value="groups">My Groups</TabsTrigger>
+                <TabsTrigger value="groups">My Ministries</TabsTrigger>
                 <TabsTrigger value="sermons">Sermons</TabsTrigger>
               </TabsList>
 
@@ -345,7 +346,7 @@ const Dashboard = () => {
                   <CardHeader>
                     <CardTitle>Prayer Wall</CardTitle>
                     <CardDescription>
-                      Share your prayer requests and pray for others in our community
+                      Share your prayer requests and pray for others in our church
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -377,13 +378,13 @@ const Dashboard = () => {
               <TabsContent value="groups">
                 <Card>
                   <CardHeader>
-                    <CardTitle>My Groups</CardTitle>
+                    <CardTitle>My Ministries</CardTitle>
                     <CardDescription>
-                      Stay connected with your Bible study groups and ministries
+                      Stay connected with your ministries and church groups
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Groups feature coming soon...</p>
+                    <p className="text-gray-600">Ministries feature coming soon...</p>
                   </CardContent>
                 </Card>
               </TabsContent>
