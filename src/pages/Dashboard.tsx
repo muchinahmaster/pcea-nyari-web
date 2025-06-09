@@ -5,11 +5,51 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Church, Users, Calendar, MessageSquare, Bell, BookOpen } from "lucide-react";
+import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import CreatePostModal from "@/components/CreatePostModal";
 
 const Dashboard = () => {
   const [userRole] = useState<"admin" | "member" | "visitor">("member");
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      type: "devotional",
+      title: "Walking in Faith",
+      author: "Pastor John",
+      content: "Today's devotional focuses on trusting God's plan...",
+      timestamp: "2 hours ago",
+      likes: 24,
+      comments: 5,
+      liked: false
+    },
+    {
+      id: 2,
+      type: "announcement",
+      title: "Youth Group Meeting",
+      author: "Sarah Johnson",
+      content: "Join us this Friday at 7 PM for fellowship and Bible study...",
+      timestamp: "4 hours ago",
+      likes: 12,
+      comments: 3,
+      liked: false
+    },
+    {
+      id: 3,
+      type: "testimony",
+      title: "Answered Prayer",
+      author: "Michael Davis",
+      content: "I want to share how God answered my prayers for healing...",
+      timestamp: "1 day ago",
+      likes: 38,
+      comments: 8,
+      liked: true
+    }
+  ]);
+  
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const recentPosts = [
     {
@@ -79,6 +119,52 @@ const Dashboard = () => {
       responses: 8
     }
   ];
+
+  const handleCreatePost = (newPost: { type: string; title: string; content: string }) => {
+    const post = {
+      id: Date.now(),
+      ...newPost,
+      author: "John Doe", // Current user
+      timestamp: "Just now",
+      likes: 0,
+      comments: 0,
+      liked: false
+    };
+    
+    setPosts([post, ...posts]);
+  };
+
+  const handleLike = (postId: number) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          liked: !post.liked,
+          likes: post.liked ? post.likes - 1 : post.likes + 1
+        };
+      }
+      return post;
+    }));
+    
+    toast({
+      title: "Post Updated",
+      description: "Your reaction has been recorded!",
+    });
+  };
+
+  const handleComment = (postId: number) => {
+    toast({
+      title: "Comment Feature",
+      description: "Comment functionality will be available soon!",
+    });
+  };
+
+  const handleShare = (postId: number) => {
+    toast({
+      title: "Post Shared",
+      description: "Post has been shared successfully!",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -186,7 +272,11 @@ const Dashboard = () => {
                       <Avatar>
                         <AvatarFallback>JD</AvatarFallback>
                       </Avatar>
-                      <Button variant="outline" className="flex-1 justify-start text-gray-500">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1 justify-start text-gray-500"
+                        onClick={() => setIsCreatePostModalOpen(true)}
+                      >
                         Share your thoughts, devotional, or testimony...
                       </Button>
                     </div>
@@ -194,7 +284,7 @@ const Dashboard = () => {
                 </Card>
 
                 {/* Posts Feed */}
-                {recentPosts.map((post) => (
+                {posts.map((post) => (
                   <Card key={post.id}>
                     <CardHeader>
                       <div className="flex items-center justify-between">
@@ -219,14 +309,30 @@ const Dashboard = () => {
                       <h3 className="font-semibold mb-2">{post.title}</h3>
                       <p className="text-gray-700 mb-4">{post.content}</p>
                       <div className="flex items-center gap-4">
-                        <Button variant="ghost" size="sm">
-                          ❤️ {post.likes}
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => handleLike(post.id)}
+                          className={post.liked ? "text-red-500" : ""}
+                        >
+                          <Heart className={`h-4 w-4 mr-1 ${post.liked ? "fill-current" : ""}`} />
+                          {post.likes}
                         </Button>
-                        <Button variant="ghost" size="sm">
-                          💬 Comment
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => handleComment(post.id)}
+                        >
+                          <MessageSquare className="h-4 w-4 mr-1" />
+                          {post.comments} Comment{post.comments !== 1 ? 's' : ''}
                         </Button>
-                        <Button variant="ghost" size="sm">
-                          🔗 Share
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => handleShare(post.id)}
+                        >
+                          <Share className="h-4 w-4 mr-1" />
+                          Share
                         </Button>
                       </div>
                     </CardContent>
@@ -299,6 +405,12 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      <CreatePostModal
+        isOpen={isCreatePostModalOpen}
+        onClose={() => setIsCreatePostModalOpen(false)}
+        onSubmit={handleCreatePost}
+      />
     </div>
   );
 };
