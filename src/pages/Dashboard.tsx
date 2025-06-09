@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,7 @@ import { Church, Users, Calendar, MessageSquare, Bell, BookOpen } from "lucide-r
 
 const Dashboard = () => {
   const [userRole] = useState<"admin" | "member" | "visitor">("member");
+  const navigate = useNavigate();
 
   const recentPosts = [
     {
@@ -115,19 +116,35 @@ const Dashboard = () => {
                 <CardTitle className="text-lg">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button className="w-full justify-start" variant="ghost">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="ghost"
+                  onClick={() => navigate('/contact')}
+                >
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Post Prayer Request
                 </Button>
-                <Button className="w-full justify-start" variant="ghost">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="ghost"
+                  onClick={() => navigate('/events')}
+                >
                   <Calendar className="h-4 w-4 mr-2" />
                   View Events
                 </Button>
-                <Button className="w-full justify-start" variant="ghost">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="ghost"
+                  onClick={() => navigate('/ministries')}
+                >
                   <Users className="h-4 w-4 mr-2" />
                   Browse Groups
                 </Button>
-                <Button className="w-full justify-start" variant="ghost">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="ghost"
+                  onClick={() => navigate('/resources')}
+                >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Sermon Archive
                 </Button>
