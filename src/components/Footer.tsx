@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -16,7 +15,7 @@ const Footer = () => {
               <span className="text-xl font-bold">PCEA NYARI CHURCH</span>
             </div>
             <p className="text-gray-400 mb-4">
-              PCEA Nyari Parish is a Church where you are Welcomed, Accepted, Loved and Shepherded.
+              A church where you are welcomed, accepted, loved and shepherded.
             </p>
           </div>
           <div>
