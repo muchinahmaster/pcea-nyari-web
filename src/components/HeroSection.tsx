@@ -18,7 +18,7 @@ const HeroSection = () => {
             Welcome to PCEA NYARI CHURCH
           </h2>
           <p className="text-xl mb-8 leading-relaxed">
-            A place where faith grows, community thrives, and hearts are transformed. 
+            A church where you are welcomed, accepted, loved and shepherded. 
             Join us as we walk together in God's love and build a stronger church family.
           </p>
           <div className="flex gap-4 flex-wrap">
