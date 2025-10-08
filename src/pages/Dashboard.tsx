@@ -13,6 +13,16 @@ import CreatePostModal from "@/components/CreatePostModal";
 const Dashboard = () => {
   const [userRole] = useState<"admin" | "member" | "visitor">("member");
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const [profileData, setProfileData] = useState(() => {
+    const saved = localStorage.getItem("profileData");
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    return {
+      name: "John Doe",
+      avatar: "/placeholder.svg"
+    };
+  });
   
   // Load posts from localStorage or use default posts
   const [posts, setPosts] = useState(() => {
@@ -64,6 +74,14 @@ const Dashboard = () => {
   useEffect(() => {
     localStorage.setItem('churchPosts', JSON.stringify(posts));
   }, [posts]);
+
+  // Load profile data from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("profileData");
+    if (saved) {
+      setProfileData(JSON.parse(saved));
+    }
+  }, []);
 
   const recentPosts = [
     {
@@ -187,10 +205,14 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <Church className="h-8 w-8 text-blue-600" />
+              <img 
+                src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
+                alt="PCEA Nyari Parish Logo" 
+                className="h-12 w-12 object-contain"
+              />
               <div>
                 <h1 className="text-2xl font-bold">PCEA Nyari Church</h1>
-                <p className="text-gray-600">Welcome back, John!</p>
+                <p className="text-gray-600">Welcome back, {profileData.name.split(' ')[0]}!</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -206,8 +228,8 @@ const Dashboard = () => {
                 className="cursor-pointer"
                 onClick={() => navigate('/account')}
               >
-                <AvatarImage src="/placeholder.svg" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarImage src={profileData.avatar} />
+                <AvatarFallback>{profileData.name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}</AvatarFallback>
               </Avatar>
             </div>
           </div>
@@ -291,7 +313,8 @@ const Dashboard = () => {
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-4">
                       <Avatar>
-                        <AvatarFallback>JD</AvatarFallback>
+                        <AvatarImage src={profileData.avatar} />
+                        <AvatarFallback>{profileData.name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <Button 
                         variant="outline" 
