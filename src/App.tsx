@@ -13,6 +13,8 @@ import Ministries from "./pages/Ministries";
 import Events from "./pages/Events";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
+import Messages from "./pages/Messages";
+import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/events" element={<Events />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/account" element={<Account />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

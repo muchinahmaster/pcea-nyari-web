@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,44 +13,57 @@ import CreatePostModal from "@/components/CreatePostModal";
 const Dashboard = () => {
   const [userRole] = useState<"admin" | "member" | "visitor">("member");
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      type: "devotional",
-      title: "Walking in Faith",
-      author: "Pastor John",
-      content: "Today's devotional focuses on trusting God's plan...",
-      timestamp: "2 hours ago",
-      likes: 24,
-      comments: 5,
-      liked: false
-    },
-    {
-      id: 2,
-      type: "announcement",
-      title: "Youth Group Meeting",
-      author: "Sarah Johnson",
-      content: "Join us this Friday at 7 PM for fellowship and Bible study...",
-      timestamp: "4 hours ago",
-      likes: 12,
-      comments: 3,
-      liked: false
-    },
-    {
-      id: 3,
-      type: "testimony",
-      title: "Answered Prayer",
-      author: "Michael Davis",
-      content: "I want to share how God answered my prayers for healing...",
-      timestamp: "1 day ago",
-      likes: 38,
-      comments: 8,
-      liked: true
+  
+  // Load posts from localStorage or use default posts
+  const [posts, setPosts] = useState(() => {
+    const savedPosts = localStorage.getItem('churchPosts');
+    if (savedPosts) {
+      return JSON.parse(savedPosts);
     }
-  ]);
+    return [
+      {
+        id: 1,
+        type: "devotional",
+        title: "Walking in Faith",
+        author: "Pastor John",
+        content: "Today's devotional focuses on trusting God's plan...",
+        timestamp: "2 hours ago",
+        likes: 24,
+        comments: 5,
+        liked: false
+      },
+      {
+        id: 2,
+        type: "announcement",
+        title: "Youth Group Meeting",
+        author: "Sarah Johnson",
+        content: "Join us this Friday at 7 PM for fellowship and Bible study...",
+        timestamp: "4 hours ago",
+        likes: 12,
+        comments: 3,
+        liked: false
+      },
+      {
+        id: 3,
+        type: "testimony",
+        title: "Answered Prayer",
+        author: "Michael Davis",
+        content: "I want to share how God answered my prayers for healing...",
+        timestamp: "1 day ago",
+        likes: 38,
+        comments: 8,
+        liked: true
+      }
+    ];
+  });
   
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Save posts to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('churchPosts', JSON.stringify(posts));
+  }, [posts]);
 
   const recentPosts = [
     {
@@ -181,11 +194,18 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/messages')}
+              >
                 <Bell className="h-4 w-4 mr-2" />
                 Notifications
               </Button>
-              <Avatar>
+              <Avatar 
+                className="cursor-pointer"
+                onClick={() => navigate('/account')}
+              >
                 <AvatarImage src="/placeholder.svg" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
