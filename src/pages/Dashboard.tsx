@@ -6,7 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share } from "lucide-react";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
+import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share, LogOut, UserCog } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CreatePostModal from "@/components/CreatePostModal";
 
@@ -198,6 +206,19 @@ const Dashboard = () => {
     });
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    toast({
+      title: "Logged Out",
+      description: "You have been successfully logged out.",
+    });
+    navigate('/login');
+  };
+
+  const handleSwitchAccount = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -224,13 +245,31 @@ const Dashboard = () => {
                 <Bell className="h-4 w-4 mr-2" />
                 Notifications
               </Button>
-              <Avatar 
-                className="cursor-pointer"
-                onClick={() => navigate('/account')}
-              >
-                <AvatarImage src={profileData.avatar} />
-                <AvatarFallback>{profileData.name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}</AvatarFallback>
-              </Avatar>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="cursor-pointer">
+                    <AvatarImage src={profileData.avatar} />
+                    <AvatarFallback>{profileData.name.split(' ').map((n: string) => n[0]).join('').toUpperCase()}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate('/account')}>
+                    <UserCog className="mr-2 h-4 w-4" />
+                    <span>Account Settings</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSwitchAccount}>
+                    <Users className="mr-2 h-4 w-4" />
+                    <span>Switch Account</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
