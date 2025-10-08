@@ -3,11 +3,57 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, User, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowLeft, User, Mail, Phone, MapPin, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Account = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [profileData, setProfileData] = useState({
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phone: "+1 234 567 8900",
+    address: "123 Church St, City, State",
+    avatar: "/placeholder.svg"
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem("profileData");
+    if (saved) {
+      setProfileData(JSON.parse(saved));
+    }
+  }, []);
+
+  const handleSave = () => {
+    localStorage.setItem("profileData", JSON.stringify(profileData));
+    toast({
+      title: "Profile updated",
+      description: "Your changes have been saved successfully."
+    });
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileData(prev => ({ ...prev, avatar: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const getInitials = () => {
+    return profileData.name
+      .split(" ")
+      .map(n => n[0])
+      .join("")
+      .toUpperCase();
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -31,12 +77,29 @@ const Account = () => {
         <Card className="mb-6">
           <CardHeader>
             <div className="flex items-center gap-4">
-              <Avatar className="h-20 w-20">
-                <AvatarImage src="/placeholder.svg" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
+              <div className="relative">
+                <Avatar className="h-20 w-20">
+                  <AvatarImage src={profileData.avatar} />
+                  <AvatarFallback>{getInitials()}</AvatarFallback>
+                </Avatar>
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Camera className="h-4 w-4" />
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                />
+              </div>
               <div>
-                <CardTitle>John Doe</CardTitle>
+                <CardTitle>{profileData.name}</CardTitle>
                 <CardDescription>Member since 2024</CardDescription>
               </div>
             </div>
@@ -54,7 +117,11 @@ const Account = () => {
                 <User className="h-4 w-4 inline mr-2" />
                 Full Name
               </Label>
-              <Input id="name" defaultValue="John Doe" />
+              <Input 
+                id="name" 
+                value={profileData.name}
+                onChange={(e) => setProfileData(prev => ({ ...prev, name: e.target.value }))}
+              />
             </div>
 
             <div className="space-y-2">
@@ -62,7 +129,12 @@ const Account = () => {
                 <Mail className="h-4 w-4 inline mr-2" />
                 Email
               </Label>
-              <Input id="email" type="email" defaultValue="john.doe@example.com" />
+              <Input 
+                id="email" 
+                type="email" 
+                value={profileData.email}
+                onChange={(e) => setProfileData(prev => ({ ...prev, email: e.target.value }))}
+              />
             </div>
 
             <div className="space-y-2">
@@ -70,7 +142,12 @@ const Account = () => {
                 <Phone className="h-4 w-4 inline mr-2" />
                 Phone
               </Label>
-              <Input id="phone" type="tel" defaultValue="+1 234 567 8900" />
+              <Input 
+                id="phone" 
+                type="tel" 
+                value={profileData.phone}
+                onChange={(e) => setProfileData(prev => ({ ...prev, phone: e.target.value }))}
+              />
             </div>
 
             <div className="space-y-2">
@@ -78,11 +155,15 @@ const Account = () => {
                 <MapPin className="h-4 w-4 inline mr-2" />
                 Address
               </Label>
-              <Input id="address" defaultValue="123 Church St, City, State" />
+              <Input 
+                id="address" 
+                value={profileData.address}
+                onChange={(e) => setProfileData(prev => ({ ...prev, address: e.target.value }))}
+              />
             </div>
 
             <div className="pt-4 space-x-4">
-              <Button>Save Changes</Button>
+              <Button onClick={handleSave}>Save Changes</Button>
               <Button variant="outline" onClick={() => navigate('/dashboard')}>
                 Cancel
               </Button>
