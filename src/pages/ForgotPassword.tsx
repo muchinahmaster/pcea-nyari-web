@@ -19,7 +19,7 @@ const ForgotPassword = () => {
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/login`,
+        redirectTo: `${window.location.origin}/auth`,
       });
 
       if (error) throw error;
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
             </form>
 
             <div className="mt-6 text-center">
-              <Link to="/login" className="text-sm text-blue-600 hover:underline">
+              <Link to="/auth" className="text-sm text-blue-600 hover:underline">
                 Back to login
               </Link>
             </div>

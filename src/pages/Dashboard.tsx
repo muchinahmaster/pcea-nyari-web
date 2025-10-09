@@ -16,20 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share, LogOut, UserCog } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import CreatePostModal from "@/components/CreatePostModal";
 
 const Dashboard = () => {
   const [userRole] = useState<"admin" | "member" | "visitor">("member");
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
-  const [profileData, setProfileData] = useState(() => {
-    const saved = localStorage.getItem("profileData");
-    if (saved) {
-      return JSON.parse(saved);
-    }
-    return {
-      name: "John Doe",
-      avatar: "/placeholder.svg"
-    };
+  const [userId, setUserId] = useState<string | null>(null);
+  const [profileData, setProfileData] = useState({
+    name: "John Doe",
+    avatar: "/placeholder.svg"
   });
   
   // Load posts from localStorage or use default posts
@@ -83,13 +79,31 @@ const Dashboard = () => {
     localStorage.setItem('churchPosts', JSON.stringify(posts));
   }, [posts]);
 
-  // Load profile data from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("profileData");
-    if (saved) {
-      setProfileData(JSON.parse(saved));
+// Auth gating and session handling
+useEffect(() => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    setUserId(session?.user?.id ?? null);
+    if (!session?.user) {
+      navigate('/auth', { replace: true });
     }
-  }, []);
+  });
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setUserId(session?.user?.id ?? null);
+    if (!session?.user) {
+      navigate('/auth', { replace: true });
+    }
+  });
+  return () => subscription.unsubscribe();
+}, [navigate]);
+
+// Load profile data for current user
+useEffect(() => {
+  if (!userId) return;
+  const saved = localStorage.getItem(`profileData:${userId}`);
+  if (saved) {
+    setProfileData(JSON.parse(saved));
+  }
+}, [userId]);
 
   const recentPosts = [
     {
@@ -206,18 +220,22 @@ const Dashboard = () => {
     });
   };
 
-  const handleLogout = () => {
-    localStorage.clear();
-    toast({
-      title: "Logged Out",
-      description: "You have been successfully logged out.",
-    });
-    navigate('/login');
-  };
+const handleLogout = async () => {
+  try {
+    await supabase.auth.signOut();
+    toast({ title: "Logged Out", description: "You have been successfully logged out." });
+  } finally {
+    navigate('/auth');
+  }
+};
 
-  const handleSwitchAccount = () => {
-    navigate('/login');
-  };
+const handleSwitchAccount = async () => {
+  try {
+    await supabase.auth.signOut();
+  } finally {
+    navigate('/auth');
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50">

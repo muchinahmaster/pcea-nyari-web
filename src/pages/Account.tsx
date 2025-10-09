@@ -7,34 +7,53 @@ import { ArrowLeft, User, Mail, Phone, MapPin, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Account = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [profileData, setProfileData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234 567 8900",
-    address: "123 Church St, City, State",
-    avatar: "/placeholder.svg"
+const [profileData, setProfileData] = useState({
+  name: "John Doe",
+  email: "john.doe@example.com",
+  phone: "+1 234 567 8900",
+  address: "123 Church St, City, State",
+  avatar: "/placeholder.svg"
+});
+const [userId, setUserId] = useState<string | null>(null);
+
+useEffect(() => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    setUserId(session?.user?.id ?? null);
+    if (!session?.user) navigate('/auth', { replace: true });
   });
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setUserId(session?.user?.id ?? null);
+    if (!session?.user) navigate('/auth', { replace: true });
+  });
+  return () => subscription.unsubscribe();
+}, [navigate]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("profileData");
-    if (saved) {
-      setProfileData(JSON.parse(saved));
-    }
-  }, []);
+useEffect(() => {
+  if (!userId) return;
+  const saved = localStorage.getItem(`profileData:${userId}`);
+  if (saved) {
+    setProfileData(JSON.parse(saved));
+  }
+}, [userId]);
 
-  const handleSave = () => {
-    localStorage.setItem("profileData", JSON.stringify(profileData));
-    toast({
-      title: "Profile updated",
-      description: "Your changes have been saved successfully."
-    });
-  };
+const handleSave = () => {
+  if (!userId) {
+    toast({ title: "Not signed in", description: "Please sign in again.", variant: "destructive" });
+    return;
+  }
+  localStorage.setItem(`profileData:${userId}`, JSON.stringify(profileData));
+  toast({
+    title: "Profile updated",
+    description: "Your changes have been saved successfully."
+  });
+};
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

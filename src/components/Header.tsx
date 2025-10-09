@@ -23,8 +23,8 @@ const Header = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/login" className="hover:text-blue-200">Member Login</Link>
-            <Link to="/register" className="hover:text-blue-200">Join Us</Link>
+            <Link to="/auth" className="hover:text-blue-200">Member Login</Link>
+            <Link to="/auth" className="hover:text-blue-200">Join Us</Link>
           </div>
         </div>
       </div>
