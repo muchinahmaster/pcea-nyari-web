@@ -15,10 +15,10 @@ const Account = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
 const [profileData, setProfileData] = useState({
-  name: "John Doe",
-  email: "john.doe@example.com",
-  phone: "+1 234 567 8900",
-  address: "123 Church St, City, State",
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
   avatar: "/placeholder.svg"
 });
 const [userId, setUserId] = useState<string | null>(null);
@@ -37,10 +37,18 @@ useEffect(() => {
 
 useEffect(() => {
   if (!userId) return;
-  const saved = localStorage.getItem(`profileData:${userId}`);
-  if (saved) {
-    setProfileData(JSON.parse(saved));
-  }
+  
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    const userEmail = session?.user?.email || "";
+    
+    const saved = localStorage.getItem(`profileData:${userId}`);
+    if (saved) {
+      const savedData = JSON.parse(saved);
+      setProfileData({ ...savedData, email: userEmail });
+    } else {
+      setProfileData(prev => ({ ...prev, email: userEmail }));
+    }
+  });
 }, [userId]);
 
 const handleSave = () => {
