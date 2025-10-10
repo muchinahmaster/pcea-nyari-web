@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share, LogOut, UserCog } from "lucide-react";
+import { Church, Users, Calendar, MessageSquare, Bell, BookOpen, Heart, Share, LogOut, UserCog, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import CreatePostModal from "@/components/CreatePostModal";
@@ -244,6 +244,14 @@ const handleSwitchAccount = async () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate('/')}
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
               <img 
                 src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
                 alt="PCEA Nyari Parish Logo" 
