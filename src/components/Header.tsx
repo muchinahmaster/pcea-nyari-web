@@ -40,7 +40,7 @@ const Header = () => {
                 className="h-12 w-12 object-contain"
               />
               <div>
-                <h1 className="text-2xl font-bold text-blue-900">PCEA NYARI CHURCH</h1>
+                <h1 className="text-2xl font-bold text-blue-900">PCEA Nyari</h1>
                 <p className="text-sm text-gray-600">Connecting Hearts, Building Faith</p>
               </div>
             </div>

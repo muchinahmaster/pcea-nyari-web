@@ -22,6 +22,7 @@ const [profileData, setProfileData] = useState({
   avatar: "/placeholder.svg"
 });
 const [userId, setUserId] = useState<string | null>(null);
+const [memberSince, setMemberSince] = useState<string>("");
 
 useEffect(() => {
   const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -40,6 +41,12 @@ useEffect(() => {
   
   supabase.auth.getSession().then(({ data: { session } }) => {
     const userEmail = session?.user?.email || "";
+    const createdAt = session?.user?.created_at;
+    
+    if (createdAt) {
+      const createdDate = new Date(createdAt);
+      setMemberSince(createdDate.getFullYear().toString());
+    }
     
     const saved = localStorage.getItem(`profileData:${userId}`);
     if (saved) {
@@ -126,8 +133,10 @@ const handleSave = () => {
                 />
               </div>
               <div>
-                <CardTitle>{profileData.name}</CardTitle>
-                <CardDescription>Member since 2024</CardDescription>
+                <CardTitle>{profileData.name || "New Member"}</CardTitle>
+                <CardDescription>
+                  {memberSince ? `Member since ${memberSince}` : "Loading..."}
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
