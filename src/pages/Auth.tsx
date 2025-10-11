@@ -178,8 +178,12 @@ const Auth = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Church className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-900">FaithConnect</h1>
+            <img 
+              src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
+              alt="PCEA Nyari Parish Logo" 
+              className="h-12 w-12 object-contain"
+            />
+            <h1 className="text-2xl font-bold text-gray-900">PCEA NYARI CHURCH</h1>
           </div>
           <p className="text-gray-600">Sign in or create your account</p>
         </div>
