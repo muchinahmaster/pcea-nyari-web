@@ -181,7 +181,7 @@ const Auth = () => {
             <img 
               src="/lovable-uploads/fca4641c-d4bf-4ea6-9a5d-76487b0a5d29.png" 
               alt="PCEA Nyari Parish Logo" 
-              className="h-12 w-12 object-contain"
+              className="h-12 w-12 object-contain mix-blend-multiply dark:mix-blend-normal dark:invert"
             />
             <h1 className="text-2xl font-bold text-gray-900">PCEA NYARI CHURCH</h1>
           </div>
