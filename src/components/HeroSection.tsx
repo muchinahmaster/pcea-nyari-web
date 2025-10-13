@@ -15,7 +15,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl text-white">
           <h2 className="text-5xl font-bold mb-6">
-            Welcome to PCEA NYARI CHURCH
+            Welcome To PCEA NYARI CHURCH
           </h2>
           <p className="text-xl mb-8 leading-relaxed">
             A church where you are welcomed, accepted, loved and shepherded. 

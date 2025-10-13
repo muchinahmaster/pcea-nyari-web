@@ -31,7 +31,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Ministries</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link to="/youth" className="hover:text-white">Youth Ministry</Link></li>
-              <li><Link to="/womens" className="hover:text-white">Women's Fellowship</Link></li>
+              <li><Link to="/womens" className="hover:text-white">Woman's Guild</Link></li>
               <li><Link to="/mens" className="hover:text-white">Men's Ministry</Link></li>
               <li><Link to="/children" className="hover:text-white">Children's Church</Link></li>
             </ul>

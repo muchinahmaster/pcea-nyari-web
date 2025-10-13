@@ -18,10 +18,39 @@ const MensFellowship = () => {
         <div className="absolute inset-0 bg-primary/70" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl text-white">
-            <h1 className="text-5xl font-bold mb-6">Welcome to PCEA NYARI PCMF</h1>
+            <h1 className="text-5xl font-bold mb-6">Welcome To PCEA NYARI PCMF</h1>
             <p className="text-xl mb-8 leading-relaxed">
               Presbyterian Church Men's Fellowship - Equipping men to be godly leaders in their families and communities.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Theme Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-8 text-foreground">
+              Theme of the Year
+            </h2>
+            <Card>
+              <CardContent className="p-8">
+                <div 
+                  className="h-64 bg-cover bg-center rounded-lg mb-6"
+                  style={{
+                    backgroundImage: "url('/lovable-uploads/c8b8453f-eeef-4726-ab8c-963f697161da.png')",
+                  }}
+                />
+                <blockquote className="text-center">
+                  <p className="text-xl italic text-muted-foreground mb-4">
+                    "For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope."
+                  </p>
+                  <footer className="text-lg font-semibold text-foreground">
+                    — Jeremiah 29:11
+                  </footer>
+                </blockquote>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
