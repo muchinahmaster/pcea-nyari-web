@@ -1,8 +1,9 @@
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import ServiceTimes from "@/components/ServiceTimes";
 import ChurchHistory from "@/components/ChurchHistory";
+import MissionVisionValues from "@/components/MissionVisionValues";
+import ServiceTimes from "@/components/ServiceTimes";
 import Announcements from "@/components/Announcements";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -12,8 +13,9 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <HeroSection />
-      <ServiceTimes />
       <ChurchHistory />
+      <MissionVisionValues />
+      <ServiceTimes />
       <Announcements />
       <ContactSection />
       <Footer />
