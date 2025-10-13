@@ -9,6 +9,10 @@ import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import About from "./pages/About";
 import Ministries from "./pages/Ministries";
+import Youth from "./pages/Youth";
+import MensFellowship from "./pages/MensFellowship";
+import WomensGuild from "./pages/WomensGuild";
+import ChildrensMinistry from "./pages/ChildrensMinistry";
 import Events from "./pages/Events";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
@@ -32,6 +36,10 @@ const App = () => (
           <Route path="/login" element={<Auth />} />
           <Route path="/register" element={<Auth />} />
           <Route path="/ministries" element={<Ministries />} />
+          <Route path="/youth" element={<Youth />} />
+          <Route path="/mens" element={<MensFellowship />} />
+          <Route path="/womens" element={<WomensGuild />} />
+          <Route path="/children" element={<ChildrensMinistry />} />
           <Route path="/events" element={<Events />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
