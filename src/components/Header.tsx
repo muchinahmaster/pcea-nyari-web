@@ -22,10 +22,6 @@ const Header = () => {
               <span>pceanyariparish@gmail.com</span>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/auth" className="hover:text-blue-200">Member Login</Link>
-            <Link to="/auth" className="hover:text-blue-200">Join Us</Link>
-          </div>
         </div>
       </div>
 
@@ -53,9 +49,6 @@ const Header = () => {
               <Link to="/events" className="text-gray-700 hover:text-blue-900 font-medium">Events</Link>
               <Link to="/resources" className="text-gray-700 hover:text-blue-900 font-medium">Resources</Link>
               <Link to="/contact" className="text-gray-700 hover:text-blue-900 font-medium">Contact</Link>
-              <Button asChild className="bg-blue-900 hover:bg-blue-800">
-                <Link to="/dashboard">Member Portal</Link>
-              </Button>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -77,9 +70,6 @@ const Header = () => {
                 <Link to="/events" className="text-gray-700 hover:text-blue-900 font-medium">Events</Link>
                 <Link to="/resources" className="text-gray-700 hover:text-blue-900 font-medium">Resources</Link>
                 <Link to="/contact" className="text-gray-700 hover:text-blue-900 font-medium">Contact</Link>
-                <Button asChild className="bg-blue-900 hover:bg-blue-800 w-full">
-                  <Link to="/dashboard">Member Portal</Link>
-                </Button>
               </div>
             </nav>
           )}
