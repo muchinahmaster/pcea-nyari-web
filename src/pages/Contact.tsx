@@ -31,52 +31,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Content */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <MapPin className="h-6 w-6 text-blue-900 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Address</h3>
-                    <p className="text-gray-600">REDHILL RD, Nairobi Kenya</p>
-                    <p className="text-gray-600">PO BOX 1202-00621 Village Market, Kenya</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <Phone className="h-6 w-6 text-blue-900 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Phone</h3>
-                    <p className="text-gray-600">+254 793 060491</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <Mail className="h-6 w-6 text-blue-900 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Email</h3>
-                    <p className="text-gray-600">pceanyariparish@gmail.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <Clock className="h-6 w-6 text-blue-900 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Service Times</h3>
-                    <p className="text-gray-600">Sunday: 8:30 AM & 11:00 AM</p>
-                    <p className="text-gray-600">Wednesday: 5:00 PM (Youth)</p>
-                    <p className="text-gray-600">Thursday: 5:00-7:00 PM (Prayer)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          <div className="max-w-2xl mx-auto">
             {/* Contact Form */}
             <Card>
               <CardHeader>
