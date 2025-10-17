@@ -5,7 +5,7 @@ import ChurchHistory from "@/components/ChurchHistory";
 import MissionVisionValues from "@/components/MissionVisionValues";
 import ServiceTimes from "@/components/ServiceTimes";
 import Announcements from "@/components/Announcements";
-import ContactSection from "@/components/ContactSection";
+
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -42,7 +42,6 @@ const Index = () => {
       <MissionVisionValues />
       <ServiceTimes />
       <Announcements />
-      <ContactSection />
       <Footer />
     </div>
   );
