@@ -1,11 +1,18 @@
 
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, Menu, X } from "lucide-react";
+import { Phone, Mail, Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMinistriesOpen, setIsMinistriesOpen] = useState(false);
 
   return (
     <>
@@ -45,7 +52,28 @@ const Header = () => {
             <nav className="hidden lg:flex items-center gap-8">
               <Link to="/" className="text-gray-700 hover:text-blue-900 font-medium">Home</Link>
               <Link to="/about" className="text-gray-700 hover:text-blue-900 font-medium">About Us</Link>
-              <Link to="/ministries" className="text-gray-700 hover:text-blue-900 font-medium">Ministries</Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-blue-900 font-medium">
+                  Ministries <ChevronDown className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-white z-50">
+                  <DropdownMenuItem asChild>
+                    <Link to="/ministries" className="w-full">All Ministries</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/womens-guild" className="w-full">Women's Guild</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/mens-fellowship" className="w-full">Men's Fellowship</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/childrens-ministry" className="w-full">Children's Ministry</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/youth" className="w-full">Youth Ministry</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Link to="/events" className="text-gray-700 hover:text-blue-900 font-medium">Events</Link>
               <Link to="/resources" className="text-gray-700 hover:text-blue-900 font-medium">Resources</Link>
               <Link to="/contact" className="text-gray-700 hover:text-blue-900 font-medium">Contact</Link>
@@ -66,7 +94,23 @@ const Header = () => {
               <div className="flex flex-col gap-4">
                 <Link to="/" className="text-gray-700 hover:text-blue-900 font-medium">Home</Link>
                 <Link to="/about" className="text-gray-700 hover:text-blue-900 font-medium">About Us</Link>
-                <Link to="/ministries" className="text-gray-700 hover:text-blue-900 font-medium">Ministries</Link>
+                <div>
+                  <button 
+                    onClick={() => setIsMinistriesOpen(!isMinistriesOpen)}
+                    className="flex items-center gap-1 text-gray-700 hover:text-blue-900 font-medium w-full"
+                  >
+                    Ministries <ChevronDown className={`h-4 w-4 transition-transform ${isMinistriesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isMinistriesOpen && (
+                    <div className="ml-4 mt-2 flex flex-col gap-2">
+                      <Link to="/ministries" className="text-gray-600 hover:text-blue-900">All Ministries</Link>
+                      <Link to="/womens-guild" className="text-gray-600 hover:text-blue-900">Women's Guild</Link>
+                      <Link to="/mens-fellowship" className="text-gray-600 hover:text-blue-900">Men's Fellowship</Link>
+                      <Link to="/childrens-ministry" className="text-gray-600 hover:text-blue-900">Children's Ministry</Link>
+                      <Link to="/youth" className="text-gray-600 hover:text-blue-900">Youth Ministry</Link>
+                    </div>
+                  )}
+                </div>
                 <Link to="/events" className="text-gray-700 hover:text-blue-900 font-medium">Events</Link>
                 <Link to="/resources" className="text-gray-700 hover:text-blue-900 font-medium">Resources</Link>
                 <Link to="/contact" className="text-gray-700 hover:text-blue-900 font-medium">Contact</Link>
